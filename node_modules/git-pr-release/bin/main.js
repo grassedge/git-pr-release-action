@@ -22,7 +22,7 @@ const gitPrRelease = require('../lib/index');
     console.error(`base branch is required.`);
     process.exit(1);
   }
-  const labels = (labelsCsv || '').split(',').map(l => l.trim());
+  const labels = (labelsCsv || '').split(',').map(l => l.trim()).filter(l => l);
   const template = templatePath ? fs.readFileSync(templatePath, 'utf8') : null;
 
   const releasePr = await gitPrRelease({

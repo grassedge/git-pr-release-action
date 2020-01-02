@@ -1,6 +1,5 @@
 const detect = require('detect-pull-reqs');
 const Octokit = require('@octokit/rest');
-const pullreqUtils = require('../lib/pullreq');
 const messageUtils = require('../lib/message');
 
 module.exports = async function({ host, token, owner, repo, base, head, assign, labels, template }) {
@@ -15,18 +14,34 @@ module.exports = async function({ host, token, owner, repo, base, head, assign, 
     return;
   }
 
-  const content = messageUtils({ template, pulls });
-
-  const pullreq = pullreqUtils({ octokit, owner, repo });
-
-  const releasePr = await pullreq.prepare({ base, head });
-
-  const updated = await octokit.pulls.update({
-    owner, repo,
-    pull_number: releasePr.number,
-    title: content.title,
-    body: content.body,
+  const pullsRes = await octokit.pulls.list({
+    owner, repo, base, head,
+    state: 'open',
   });
+
+  let releasePr;
+  if (pullsRes.data.length === 0) {
+    // create
+    const content = messageUtils({ template, pulls });
+    const createdRes = await octokit.pulls.create({
+      owner, repo, base, head,
+      title: content.title,
+      body: content.body,
+    });
+    releasePr = createdRes.data;
+  } else {
+    // update
+    const existing = pullsRes.data[0];
+    // TODO: search checked pull-requests and keep them.
+    const content = messageUtils({ template, pulls });
+    const updatedRes = await octokit.pulls.update({
+      owner, repo,
+      pull_number: existing.number,
+      title: content.title,
+      body: content.body,
+    });
+    releasePr = updatedRes.data;
+  }
 
   if (labels.length) {
     await octokit.issues.addLabels({
@@ -49,5 +64,5 @@ module.exports = async function({ host, token, owner, repo, base, head, assign, 
     });
   }
 
-  return updated.data;
+  return releasePr;
 };
