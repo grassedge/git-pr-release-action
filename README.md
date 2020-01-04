@@ -1,9 +1,9 @@
-# create-release-pull-request-action
+# git-pr-release-action
 
 Create a pull-request for the production release.
 
-If your team adopts a workflow like 'GitLab flow', you may have two branches, such as production and pre-production (or staging and so on)
-This action helps to list up pull-requests related to commits between production and pre-production. And create a new pull-request with the list in the body.
+If your team adopts a workflow like 'GitLab flow', you may have two branches, such as production and pre-production (or staging and so on).
+This action helps to list up pull-requests related to commits between production and pre-production. And creates (or updates) a new pull-request with the list in the body.
 
 This action is inspired by [motemen/git-pr-release](https://github.com/motemen/git-pr-release) and [uiur/github-pr-release](https://github.com/uiur/github-pr-release).
 
@@ -20,7 +20,7 @@ on:
 jobs:
   release_pull_request:
     runs-on: ubuntu-latest
-    name: plantuml
+    name: release_pull_request
     steps:
       - name: checkout
         uses: actions/checkout@v1
