@@ -28,4 +28,4 @@ runs:
   main: 'dist/index.js'
 branding:
   icon: 'image'
-  color: 'gray-dark'
+  color: 'check-square'
