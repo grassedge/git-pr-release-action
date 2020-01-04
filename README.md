@@ -2,8 +2,10 @@
 
 Create a pull-request for the production release.
 
-If your team takes up a workflow like 'GitLab flow', you must have two branches, production and pre-production (or staging and so on)
-This action helps to list pull-requests included in commits between production and pre-production. And create a new pull-request with the list in the body.
+If your team adopts a workflow like 'GitLab flow', you may have two branches, such as production and pre-production (or staging and so on)
+This action helps to list up pull-requests related to commits between production and pre-production. And create a new pull-request with the list in the body.
+
+This action is inspired by [motemen/git-pr-release](https://github.com/motemen/git-pr-release) and [uiur/github-pr-release](https://github.com/uiur/github-pr-release).
 
 ## Usage
 
@@ -34,20 +36,21 @@ jobs:
 
 *input*
 
-- owner: Default is current reopsitory's owner.
-- repo: Default is current reopsitory's name.
-- *required* base: Base branch of the release pull-request.
-- *required* head: Head branch of the release pull-request.
-- assign: If true, assign each pull-req's assignees to the release pull-req
-- labels: Labels that is added to the release pull-request
-- template: Path to the template you want to use.
-- *required* token: GITHUB_TOKEN for creating a pull request.
+- `owner`: Default is current reopsitory's owner.
+- `repo`: Default is current reopsitory's name.
+- *required* `base`: Base branch of the release pull-request.
+- *required* `head`: Head branch of the release pull-request. Typically, it is the same as a subscribed branch.
+- `assign`: If true, assign each pull-req's assignees to the release pull-req
+- `labels`: Labels that is added to the release pull-request
+- `template`: Path to the template you want to use.
+- `tz`: Used to generate the version string.
+- *required* `token`: GITHUB_TOKEN for creating a pull request.
 
 Note that this action uses the template file in your repository. So you need 'checkout' step if you specify template option.
 
 ## Demo
 
-
+![](./docs/screenshot.png)
 
 ## License
 

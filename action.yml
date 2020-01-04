@@ -7,8 +7,10 @@ inputs:
   repo:
     description: "Default is current reopsitory's name."
   base:
+    description: "Base branch of the release pull-request."
     required: true
   head:
+    description: "Head branch of the release pull-request. Typically, it is the same as a subscribed branch."
     required: true
   assign:
     description: "If true, assign each pull-req's assignees to the release pull-req"
@@ -16,8 +18,11 @@ inputs:
     description: 'Labels that is added to the release pull-request'
   template:
     description: 'Path to the template you want to use.'
+  tz:
+    description: 'Used to generate the version string.'
   token:
-    description: ''
+    description: 'Used to create a pull request.'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
