@@ -1,4 +1,4 @@
-name: 'Create a release pull-request'
+name: 'Git pr release action'
 description: 'Create a release pull-request.'
 author: 'grassedge'
 inputs:
