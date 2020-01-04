@@ -2,8 +2,8 @@
   "name": "git-pr-release-action",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "package": "ncc build lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,8 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^2.0.0",
-    "git-pr-release": "^1.0.3",
+    "@zeit/ncc": "^0.20.5",
+    "git-pr-release": "^1.0.4",
     "moment-timezone": "^0.5.27"
   }
 }
