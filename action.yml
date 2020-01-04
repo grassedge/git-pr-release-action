@@ -27,5 +27,5 @@ runs:
   using: 'node12'
   main: 'dist/index.js'
 branding:
-  icon: 'image'
-  color: 'check-square'
+  icon: 'check-square'
+  color: 'gray-dark'
