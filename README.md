@@ -34,17 +34,17 @@ jobs:
           assign: true
 ```
 
-*input*
+**input**
 
 - `owner`: Default is current reopsitory's owner.
 - `repo`: Default is current reopsitory's name.
-- *required* `base`: Base branch of the release pull-request.
-- *required* `head`: Head branch of the release pull-request. Typically, it is the same as a subscribed branch.
+- `base`: **required** Base branch of the release pull-request.
+- `head`: **required** Head branch of the release pull-request. Typically, it is the same as a subscribed branch.
 - `assign`: If true, assign each pull-req's assignees to the release pull-req
 - `labels`: Labels that is added to the release pull-request
 - `template`: Path to the template you want to use.
 - `tz`: Used to generate the version string.
-- *required* `token`: GITHUB_TOKEN for creating a pull request.
+- `token`: **required** `GITHUB_TOKEN` for creating a pull request.
 
 Note that this action uses the template file in your repository. So you need 'checkout' step if you specify template option.
 
