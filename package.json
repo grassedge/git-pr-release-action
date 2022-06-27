@@ -1,5 +1,5 @@
 {
-  "name": "git-pr-release-action",
+  "name": "@splashthat/git-pr-release-action",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -19,8 +19,8 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^2.0.0",
+    "@splashthat/git-pr-release": "^1.1.0",
     "@zeit/ncc": "^0.20.5",
-    "git-pr-release": "^1.0.4",
     "moment-timezone": "^0.5.27"
   }
 }
