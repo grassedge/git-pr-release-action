@@ -24,7 +24,7 @@ inputs:
     description: 'Used to create a pull request.'
     required: true
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   icon: 'check-square'
