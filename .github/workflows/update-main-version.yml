@@ -11,9 +11,10 @@ on:
         type: choice
         description: The major version to update
         options:
-          - v3
-          - v2
           - v1
+          - v2
+          - v3
+          
 
 jobs:
   tag:
