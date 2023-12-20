@@ -1,0 +1,39 @@
+name: Update Main Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'The tag or reference to use'
+        required: true
+      major_version:
+        type: choice
+        description: 'The major version to update'
+        options:
+          - v1
+          - v2
+          - v3
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Git
+      run: |
+        git config user.name 'splash-engineering-automations'
+        git config user.email 'engineering-automations@splashthat.com'
+        git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
+
+    - name: Tag new target
+      run: git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
+
+    - name: Push new tag
+      run: git push origin ${{ github.event.inputs.major_version }} --force

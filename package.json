@@ -1,6 +1,6 @@
 {
-  "name": "git-pr-release-action",
-  "version": "1.0.0",
+  "name": "@splashthat/git-pr-release-action",
+  "version": "1.1.1",
   "description": "",
   "scripts": {
     "package": "ncc build lib/index.js",
@@ -19,8 +19,10 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^2.0.0",
+    "@octokit/plugin-throttling": "^4.3.2",
+    "@octokit/rest": "^19.0.5",
     "@zeit/ncc": "^0.20.5",
-    "git-pr-release": "^1.0.4",
-    "moment-timezone": "^0.5.27"
+    "moment-timezone": "^0.5.27",
+    "mustache": "^4.2.0"
   }
 }
