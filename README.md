@@ -32,6 +32,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           labels: a,b,c
           assign: true
+          requestReviewers: true
 ```
 
 **input**

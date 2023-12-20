@@ -14,6 +14,8 @@ inputs:
     required: true
   assign:
     description: "If true, assign each pull-req's assignees to the release pull-req"
+  requestReviewers:
+    description: "If true, assign each pull-req's reviewers to the release pull-req"
   labels:
     description: 'Labels that is added to the release pull-request'
   template:
