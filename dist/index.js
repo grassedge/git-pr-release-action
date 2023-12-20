@@ -4422,6 +4422,7 @@ module.exports = async function ({
   base,
   head,
   assign,
+  requestReviewers,
   labels,
   template,
 }) {
@@ -4499,6 +4500,21 @@ module.exports = async function ({
       repo,
       issue_number: releasePr.number,
       assignees,
+    });
+  }
+
+  if (requestReviewers) {
+    core.info("Assigning pull request reviewers to the PR");
+    const assignees = pulls
+      .reduce((accum, p) => accum.concat(p.assignees, p.user), [])
+      .filter((user) => user.type === "User")
+      .map((user) => user.login);
+
+    octokit.pulls.requestReviewers({
+      owner,
+      repo,
+      pull_number: releasePr.number,
+      reviewers: assignees,
     });
   }
 
@@ -12967,25 +12983,26 @@ const github = __webpack_require__(469);
 const gitPrRelease = __webpack_require__(326);
 
 (async function main() {
-  const {
-    owner = core.getInput('owner'),
-    repo = core.getInput('repo'),
-  } = github.context.repo;
+  const { owner = core.getInput("owner"), repo = core.getInput("repo") } =
+    github.context.repo;
 
-  const base = core.getInput('base');
-  const head = core.getInput('head');
+  const base = core.getInput("base");
+  const head = core.getInput("head");
   // Currently, GitHub Actions does not support GHE.
-  const host = core.getInput('host');
-  const token = core.getInput('token');
-  const assign = core.getInput('assign');
-  const labelsCsv = core.getInput('labels');
-  const templatePath = core.getInput('template');
+  const host = core.getInput("host");
+  const token = core.getInput("token");
+  const assign = core.getInput("assign");
+  const requestReviewers = core.getInput("requestReviewers");
+  const labelsCsv = core.getInput("labels");
+  const templatePath = core.getInput("template");
 
   const areLabelsDefined = labelsCsv && labelsCsv.length;
-  const labels = areLabelsDefined ? labelsCsv.split(',').map(l => l.trim()) : [];
-  const template = templatePath ? fs.readFileSync(templatePath, 'utf8') : null;
+  const labels = areLabelsDefined
+    ? labelsCsv.split(",").map((l) => l.trim())
+    : [];
+  const template = templatePath ? fs.readFileSync(templatePath, "utf8") : null;
 
-  const tz = core.getInput('tz');
+  const tz = core.getInput("tz");
   if (tz) {
     process.env.TZ = tz;
   }
@@ -12996,23 +13013,30 @@ const gitPrRelease = __webpack_require__(326);
   core.info(`owner: ${owner}`);
   core.info(`repo: ${repo}`);
   core.info(`assign: ${assign}`);
+  core.info(`requestReviewers: ${requestReviewers}`);
   core.info(`labels: ${labels}`);
   core.info(`template: ${template}`);
 
   const releasePr = await gitPrRelease({
-    host, token, owner, repo,
-    base, head,
-    assign, labels, template,
+    host,
+    token,
+    owner,
+    repo,
+    base,
+    head,
+    assign,
+    requestReviewers,
+    labels,
+    template,
   });
 
-  core.info('Returned PR:');
-  for(let key in releasePr) {
+  core.info("Returned PR:");
+  for (let key in releasePr) {
     if (releasePr.hasOwnProperty(key)) {
       core.info(`${key}: ${releasePr[key]}`);
     }
   }
-
-})().catch(e => {
+})().catch((e) => {
   core.setFailed(e.message);
 });
 
