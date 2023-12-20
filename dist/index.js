@@ -27653,7 +27653,7 @@ exports.request = request;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const Octokit = __webpack_require__(889);
+const { Octokit } = __webpack_require__(889);
 const { throttling } = __webpack_require__(617);
 const THROTTLING_RETRY_LIMIT = 3;
 
