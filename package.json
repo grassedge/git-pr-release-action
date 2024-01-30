@@ -1,6 +1,6 @@
 {
   "name": "@splashthat/git-pr-release-action",
-  "version": "1.1.1",
+  "version": "1.1.6",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
