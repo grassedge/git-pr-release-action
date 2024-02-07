@@ -44,7 +44,7 @@ jobs:
     name: release_pull_request
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: create-release-pr
         uses: grassedge/git-pr-release-action@v1.0
         with:
