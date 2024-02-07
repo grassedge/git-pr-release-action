@@ -3,9 +3,9 @@ description: 'Create a release pull-request.'
 author: 'grassedge'
 inputs:
   owner:
-    description: "Default is current reopsitory's owner."
+    description: "Default is current repository's owner."
   repo:
-    description: "Default is current reopsitory's name."
+    description: "Default is current repository's name."
   base:
     description: "Base branch of the release pull-request."
     required: true
@@ -26,8 +26,8 @@ inputs:
     description: 'Used to create a pull request.'
     required: true
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'node20'
+  main: 'index.js'
 branding:
   icon: 'check-square'
   color: 'gray-dark'
