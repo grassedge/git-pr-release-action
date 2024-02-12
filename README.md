@@ -10,6 +10,7 @@ This action is inspired by [motemen/git-pr-release](https://github.com/motemen/g
 ## How to release a new version
 
 ### Create a tag
+- If you perform a change on your pr run `npm run package`
 - When the pr gets merged create a release [clicking here](https://github.com/SplashThat/git-pr-release-action/releases/new)
 - Click on "choose tag" and type your version, for example if you fixed a bug and we were on v1.1.5 you have to type v1.1.6 as we follow semver for versioning our action.
 - Click on "generate release notes", this will automatically add on the release description a list of the PR's included between this and the last pushed tag.
